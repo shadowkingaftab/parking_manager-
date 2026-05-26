@@ -565,8 +565,8 @@
     <script>
         // ========== DYNAMIC BACKEND INTEGRATION (PHP/MySQL via XAMPP) ==========
         let API_BASE = 'api.php';
-        if (window.location.protocol === 'file:') {
-            // Fallback for filesystem direct execution, assuming standard XAMPP paths
+        // If double-clicked (file://) or running on a dev server port (like VS Code Live Server)
+        if (window.location.protocol === 'file:' || (window.location.port && window.location.port !== '80' && window.location.port !== '443')) {
             API_BASE = 'http://localhost/parking_manager/api.php';
         }
         let currentUserRole = null;

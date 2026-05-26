@@ -1,8 +1,8 @@
 <?php
 // =======================================================
--- ÉLAN PARK - PARKING SYSTEM PHP BACKEND API
--- DBMS 4th Sem Project
--- =======================================================
+// ÉLAN PARK - PARKING SYSTEM PHP BACKEND API
+// DBMS 4th Sem Project
+// =======================================================
 
 // Enable error reporting for debugging during development
 error_reporting(E_ALL);

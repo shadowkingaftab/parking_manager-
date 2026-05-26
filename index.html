@@ -572,7 +572,7 @@
         let currentUserRole = null;
         let selectedSpaceId = null;
 
-        // Helper fetch with user_id injection
+        // Helper fetch with user_id injection and clean error feedback
         async function fetchJson(url, options = {}) {
             let body = options.body ? JSON.parse(options.body) : {};
             if (options.method === 'POST' && (url.includes('/vehicles') || url.includes('/sessions/start') || url.includes('/sessions/end'))) {
@@ -588,11 +588,26 @@
                 method: options.method || 'GET',
                 body: options.body || null
             });
+            
+            const contentType = res.headers.get("content-type");
             if (!res.ok) {
-                const err = await res.json();
-                throw new Error(err.error || 'Request failed');
+                if (contentType && contentType.indexOf("application/json") !== -1) {
+                    const err = await res.json();
+                    throw new Error(err.error || 'Request failed');
+                } else {
+                    const rawText = await res.text();
+                    const cleanText = rawText.replace(/<[^>]*>/g, '').trim().substring(0, 150);
+                    throw new Error("Server Error: " + (cleanText || 'HTML received instead of JSON. Ensure XAMPP is running.'));
+                }
             }
-            return res.json();
+            
+            if (contentType && contentType.indexOf("application/json") !== -1) {
+                return res.json();
+            } else {
+                const rawText = await res.text();
+                const cleanText = rawText.replace(/<[^>]*>/g, '').trim().substring(0, 150);
+                throw new Error("Server Error (HTML): " + (cleanText || 'Empty HTML response.'));
+            }
         }
 
         // Load Real-time occupancy details from the Database View (DBMS concept explanation)
@@ -858,22 +873,30 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        // ========== RESTORE SESSION ON PAGE LOAD ==========
-        (function restoreSession() {
-            const uid = localStorage.getItem('user_id');
-            const role = localStorage.getItem('user_role');
-            if (uid && role) {
-                currentUserRole = role;
-                document.getElementById('logoutBtn').style.display = 'inline-block';
-                document.getElementById('vehicleSection').style.display = 'block';
-                document.getElementById('parkSection').style.display = 'block';
-                if (role === 'Administrator') document.getElementById('adminPanel').style.display = 'block';
-                loadVehicles();
-                loadLots();
-                loadHistory();
-                loadOccupancyView(); // Load dynamic database view data
-                if (role === 'Administrator') loadAdminHistory();
+        // ========== AUTO-LOGIN BYPASS (No Login Screen Needed!) ==========
+        (function bypassLogin() {
+            // Hardcode standard user ID 1 (seeded Administrator in MySQL schema)
+            localStorage.setItem('user_id', '1');
+            localStorage.setItem('user_role', 'Administrator');
+            currentUserRole = 'Administrator';
+            
+            // Hide the Access Club/Login section completely
+            const authCard = document.getElementById('authCard');
+            if (authCard) {
+                authCard.style.display = 'none';
             }
+            
+            // Unhide all active dashboard segments directly
+            document.getElementById('vehicleSection').style.display = 'block';
+            document.getElementById('parkSection').style.display = 'block';
+            document.getElementById('adminPanel').style.display = 'block';
+            
+            // Automatically fetch and load all database records directly
+            loadVehicles();
+            loadLots();
+            loadHistory();
+            loadOccupancyView(); // Load live MySQL view data
+            loadAdminHistory();
         })();
     </script>
 </body>

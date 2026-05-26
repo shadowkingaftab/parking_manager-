@@ -1,0 +1,17 @@
+.venv/
+parking_system.db
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+ENV/
+env.bak/
+.idea/
+.vscode/
+*.sqlite3
+*.db
+*.sqlite

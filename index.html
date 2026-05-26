@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>ÉLAN PARK | Private Parking Residence</title>
+    <!-- Google Fonts: Elegant serif + clean sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0e17;
+            font-family: 'Montserrat', sans-serif;
+            color: #f5f0e8;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Subtle animated background gradient */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 30%, rgba(20, 30, 50, 0.6), rgba(10, 14, 23, 0.95));
+            z-index: -2;
+        }
+
+        /* Elegant noise texture overlay */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Main container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 1.8rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Header Section */
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(232, 213, 163, 0.25);
+        }
+
+        .logo-area {
+            flex: 1;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: #e8d5a3;
+            letter-spacing: 4px;
+            margin-bottom: 0.25rem;
+        }
+
+        .logo-area h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            font-size: 2.8rem;
+            letter-spacing: 6px;
+            color: #f5f0e8;
+            margin: 0;
+            line-height: 1.1;
+        }
+
+        .logo-sub {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #c9b896;
+            margin-top: 0.4rem;
+        }
+
+        .gold-divider {
+            width: 70px;
+            height: 1px;
+            background: #e8d5a3;
+            margin-top: 0.8rem;
+            opacity: 0.6;
+        }
+
+        /* Luxury Clock Display */
+        .luxury-clock {
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            letter-spacing: 3px;
+            background: rgba(232, 213, 163, 0.08);
+            padding: 0.6rem 1.3rem;
+            border-radius: 40px;
+            border: 1px solid rgba(232, 213, 163, 0.3);
+            color: #e8d5a3;
+            backdrop-filter: blur(8px);
+            font-weight: 500;
+        }
+
+        /* Cards - Elegant Glassmorphism */
+        .elegant-card {
+            background: rgba(17, 22, 31, 0.7);
+            backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(232, 213, 163, 0.15);
+            transition: all 0.4s ease;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .elegant-card:hover {
+            border-color: rgba(232, 213, 163, 0.35);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Section Titles - Gold Left Border */
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 1.8rem;
+            padding-left: 1.2rem;
+            border-left: 4px solid #e8d5a3;
+            color: #f5f0e8;
+        }
+
+        /* Form Elements - Minimal Bottom Border */
+        .form-group {
+            margin-bottom: 1.8rem;
+        }
+
+        label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            font-weight: 500;
+            color: #c9b896;
+            display: block;
+            margin-bottom: 0.6rem;
+        }
+
+        input, select {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.02);
+            border: none;
+            border-bottom: 1px solid rgba(232, 213, 163, 0.4);
+            padding: 0.8rem 0 0.5rem 0;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            color: #f5f0e8;
+            transition: all 0.25s ease;
+            border-radius: 0;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-bottom: 2px solid #e8d5a3;
+            background: rgba(232, 213, 163, 0.02);
+        }
+
+        ::placeholder {
+            color: rgba(201, 184, 150, 0.5);
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        select option {
+            background: #11161f;
+            color: #f5f0e8;
+        }
+
+        /* Buttons - Elegant Pill Shapes */
+        .btn {
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            border: none;
+            margin-right: 1rem;
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+        }
+
+        .btn-primary {
+            background: #e8d5a3;
+            color: #0a0e17;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary:hover {
+            background: #f0e1b5;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(232, 213, 163, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #e8d5a3;
+            color: #e8d5a3;
+        }
+
+        .btn-outline:hover {
+            background: rgba(232, 213, 163, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .btn-danger {
+            background: #8b2c1d;
+            color: #f5f0e8;
+            border: 1px solid #e8d5a3;
+        }
+
+        .btn-danger:hover {
+            background: #a03c2a;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: #1e5631;
+            color: #f5f0e8;
+        }
+
+        .btn-success:hover {
+            background: #2a6e3f;
+            transform: translateY(-2px);
+        }
+
+        .btn-info {
+            background: #1a4c6e;
+            color: #f5f0e8;
+        }
+
+        .btn-info:hover {
+            background: #1f5a82;
+            transform: translateY(-2px);
+        }
+
+        /* Vehicle Collection */
+        .collection-header {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            letter-spacing: 2.5px;
+            margin: 1.8rem 0 1.2rem 0;
+            font-size: 0.85rem;
+            display: inline-block;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s ease;
+            color: #c9b896;
+        }
+
+        .collection-header:hover {
+            border-bottom: 1px solid #e8d5a3;
+        }
+
+        .vehicle-item {
+            padding: 0.7rem 0;
+            border-left: 2px solid rgba(232, 213, 163, 0.4);
+            padding-left: 1.2rem;
+            margin: 0.5rem 0;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .vehicle-item:hover {
+            border-left-color: #e8d5a3;
+            padding-left: 1.5rem;
+        }
+
+        /* Space Grid - Green/Red/Yellow */
+        .space-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(105px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .space-card {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 14px;
+            padding: 1rem 0.3rem;
+            text-align: center;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            border: 1px solid rgba(232, 213, 163, 0.2);
+            font-size: 0.85rem;
+        }
+
+        .space-card.available {
+            background: rgba(46, 204, 113, 0.75);
+            color: #0a0e17;
+            border-color: #2ecc71;
+        }
+
+        .space-card.occupied {
+            background: rgba(231, 76, 60, 0.75);
+            color: #f5f0e8;
+            border-color: #e74c3c;
+        }
+
+        .space-card.maintenance {
+            background: rgba(243, 156, 18, 0.75);
+            color: #0a0e17;
+            border-color: #f39c12;
+        }
+
+        .space-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 14px rgba(232, 213, 163, 0.2);
+            border-color: #e8d5a3;
+        }
+
+        /* History Containers */
+        .history-container {
+            max-height: 380px;
+            overflow-y: auto;
+            margin-top: 1rem;
+            padding-right: 6px;
+        }
+
+        .history-item, .admin-history-item {
+            background: rgba(0, 0, 0, 0.35);
+            border-left: 3px solid #e8d5a3;
+            padding: 1rem;
+            margin-bottom: 0.8rem;
+            border-radius: 12px;
+            transition: all 0.2s;
+        }
+
+        .history-item:hover, .admin-history-item:hover {
+            background: rgba(232, 213, 163, 0.05);
+            transform: translateX(3px);
+        }
+
+        .total-cost {
+            margin-top: 1.5rem;
+            text-align: center;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            background: rgba(232, 213, 163, 0.08);
+            padding: 1rem;
+            border-radius: 40px;
+            font-weight: 500;
+            color: #e8d5a3;
+        }
+
+        /* Layout Grid */
+        .row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 2rem;
+        }
+
+        .admin-panel {
+            margin-top: 2rem;
+            border-top: 1px solid rgba(232, 213, 163, 0.3);
+            padding-top: 1.8rem;
+        }
+
+        /* Message Styling */
+        .message {
+            padding: 0.8rem;
+            border-radius: 12px;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+        }
+
+        /* Active Session Indicator */
+        .active-session-badge {
+            background: rgba(46, 204, 113, 0.2);
+            padding: 0.8rem;
+            border-radius: 12px;
+            margin-top: 1rem;
+            border: 1px solid rgba(46, 204, 113, 0.5);
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #11161f;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e8d5a3;
+            border-radius: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.2rem;
+            }
+            .btn {
+                width: 100%;
+                margin-bottom: 0.7rem;
+                margin-right: 0;
+            }
+            .header-section {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Subtle loading animation for space cards */
+        @keyframes subtlePulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Elegant Header -->
+        <div class="header-section">
+            <div class="logo-area">
+                <div class="logo-icon"><i class="fas fa-crown"></i></div>
+                <h1>ÉLAN PARK</h1>
+                <div class="logo-sub">PRIVATE PARKING RESIDENCE</div>
+                <div class="gold-divider"></div>
+            </div>
+            <div class="luxury-clock" id="liveClock">--:--:--</div>
+        </div>
+
+        <!-- Authentication Section -->
+        <div class="elegant-card" id="authCard">
+            <div class="section-title">Access Club</div>
+            <div class="row">
+                <div class="form-group">
+                    <label><i class="far fa-user"></i> Name</label>
+                    <input type="text" id="loginName" placeholder="Your name" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="loginPass" placeholder="••••••">
+                </div>
+            </div>
+            <button class="btn btn-primary" onclick="login()"><i class="fas fa-sign-in-alt"></i> Login</button>
+            <button class="btn btn-outline" onclick="register()"><i class="fas fa-user-plus"></i> Register</button>
+            <button class="btn btn-danger" onclick="logout()" id="logoutBtn" style="display:none;"><i class="fas fa-door-open"></i> Logout</button>
+            <div id="authMsg"></div>
+        </div>
+
+        <!-- Vehicle Fleet Section -->
+        <div class="elegant-card" id="vehicleSection" style="display:none;">
+            <div class="section-title">My Fleet</div>
+            <div class="row">
+                <div class="form-group"><label>License Plate</label><input type="text" id="plate" placeholder="XX 9999"></div>
+                <div class="form-group"><label>Make</label><input type="text" id="make" placeholder="Rolls-Royce"></div>
+                <div class="form-group"><label>Model</label><input type="text" id="model" placeholder="Phantom"></div>
+                <div class="form-group"><label>Color</label><input type="text" id="color" placeholder="Obsidian Black"></div>
+            </div>
+            <button class="btn btn-primary" onclick="addVehicle()"><i class="fas fa-plus-circle"></i> Add Vehicle</button>
+            <div id="vehicleList"></div>
+        </div>
+
+        <!-- Parking Valet Section -->
+        <div class="elegant-card" id="parkSection" style="display:none;">
+            <div class="section-title">Valet Station</div>
+
+            <!-- Real-Time Pavilion Status (DBMS View) -->
+            <div style="margin-bottom: 2rem; background: rgba(232, 213, 163, 0.04); border: 1px solid rgba(232, 213, 163, 0.15); border-radius: 14px; padding: 1.2rem;">
+                <div style="font-family:'Cormorant Garamond', serif; font-size:1.3rem; margin-bottom:0.8rem; color:#e8d5a3; letter-spacing: 1px; display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fas fa-chart-pie"></i> Real-Time Pavilion Status (DBMS View)
+                </div>
+                <div id="occupancyViewContainer" style="overflow-x: auto;">
+                    <div style="opacity:0.6; font-size:0.85rem;">Loading data from database view...</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label>Select Pavilion</label>
+                    <select id="lotSelect" onchange="loadSpaceGrid()"><option>Choose lot</option></select>
+                </div>
+                <div class="form-group">
+                    <label>Choose Vehicle</label>
+                    <select id="vehicleSelect"><option>Select car</option></select>
+                </div>
+            </div>
+            <button class="btn btn-success" onclick="startParking()"><i class="fas fa-play"></i> Start Session</button>
+            <div id="activeSessionInfo"></div>
+
+            <!-- Prestige Spaces Map -->
+            <div style="margin-top: 2rem;">
+                <div style="font-family:'Cormorant Garamond', serif; font-size:1.4rem; margin-bottom:0.8rem; color:#e8d5a3;">
+                    <i class="fas fa-map-marked-alt"></i> Prestige Spaces
+                </div>
+                <div id="spaceGridContainer" class="space-grid"></div>
+            </div>
+
+            <!-- End Parking -->
+            <div style="margin-top: 2rem;">
+                <div class="section-title" style="font-size:1.3rem;">Conclude Parking</div>
+                <div class="row">
+                    <div class="form-group">
+                        <label>Session ID</label>
+                        <input type="number" id="endSessionId" placeholder="Enter session ID">
+                    </div>
+                </div>
+                <button class="btn btn-danger" onclick="endParking()"><i class="fas fa-flag-checkered"></i> End Session</button>
+            </div>
+
+            <!-- Parking History -->
+            <div style="margin-top: 2rem;">
+                <div class="section-title" style="font-size:1.3rem;">My Chronicles</div>
+                <button class="btn btn-info" onclick="loadHistory()"><i class="fas fa-sync-alt"></i> Refresh History</button>
+                <div id="historyDisplay" class="history-container"></div>
+                <div id="totalCostDisplay" class="total-cost"></div>
+            </div>
+
+            <!-- Admin Dashboard (hidden for non-admin) -->
+            <div id="adminPanel" style="display:none;" class="admin-panel">
+                <div class="section-title" style="font-size:1.3rem;">Executive Dashboard</div>
+                <button class="btn btn-primary" onclick="loadAdminHistory()"><i class="fas fa-globe"></i> View All Members' Sessions</button>
+                <div id="adminHistoryDisplay" class="history-container" style="margin-top: 1rem;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========== DYNAMIC BACKEND INTEGRATION (PHP/MySQL via XAMPP) ==========
+        let API_BASE = 'api.php';
+        if (window.location.protocol === 'file:') {
+            // Fallback for filesystem direct execution, assuming standard XAMPP paths
+            API_BASE = 'http://localhost/parking_manager/api.php';
+        }
+        let currentUserRole = null;
+        let selectedSpaceId = null;
+
+        // Helper fetch with user_id injection
+        async function fetchJson(url, options = {}) {
+            let body = options.body ? JSON.parse(options.body) : {};
+            if (options.method === 'POST' && (url.includes('/vehicles') || url.includes('/sessions/start') || url.includes('/sessions/end'))) {
+                body.user_id = localStorage.getItem('user_id');
+                options.body = JSON.stringify(body);
+            }
+            if (options.method !== 'POST' && localStorage.getItem('user_id')) {
+                const sep = url.includes('?') ? '&' : '?';
+                url = url + sep + 'user_id=' + localStorage.getItem('user_id');
+            }
+            const res = await fetch(url, {
+                headers: { 'Content-Type': 'application/json' },
+                method: options.method || 'GET',
+                body: options.body || null
+            });
+            if (!res.ok) {
+                const err = await res.json();
+                throw new Error(err.error || 'Request failed');
+            }
+            return res.json();
+        }
+
+        // Load Real-time occupancy details from the Database View (DBMS concept explanation)
+        async function loadOccupancyView() {
+            try {
+                const data = await fetchJson(API_BASE + '/occupancy');
+                const container = document.getElementById('occupancyViewContainer');
+                if (!data || !data.length) {
+                    container.innerHTML = '<div style="opacity:0.6; font-size:0.85rem;">No pavilion data available.</div>';
+                    return;
+                }
+                let tableHtml = `
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 0.5rem; font-size: 0.85rem; text-align: left;">
+                        <thead>
+                            <tr style="border-bottom: 1px solid rgba(232, 213, 163, 0.3); color: #c9b896; text-transform: uppercase; letter-spacing: 1px;">
+                                <th style="padding: 0.6rem 0.4rem;">Pavilion Name</th>
+                                <th style="padding: 0.6rem 0.4rem;">Location</th>
+                                <th style="padding: 0.6rem 0.4rem; text-align: center;">Total Capacity</th>
+                                <th style="padding: 0.6rem 0.4rem; text-align: center; color: #2ecc71;">Available</th>
+                                <th style="padding: 0.6rem 0.4rem; text-align: center; color: #e74c3c;">Occupied</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+                data.forEach(row => {
+                    tableHtml += `
+                        <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+                            <td style="padding: 0.6rem 0.4rem; font-weight: 500;">🏛️ ${row.lot_name}</td>
+                            <td style="padding: 0.6rem 0.4rem; opacity: 0.8;">${row.lot_location}</td>
+                            <td style="padding: 0.6rem 0.4rem; text-align: center;">${row.total_capacity}</td>
+                            <td style="padding: 0.6rem 0.4rem; text-align: center; font-weight: bold; color: #2ecc71;">${row.available_spaces}</td>
+                            <td style="padding: 0.6rem 0.4rem; text-align: center; font-weight: bold; color: #e74c3c;">${row.occupied_spaces}</td>
+                        </tr>
+                    `;
+                });
+                tableHtml += `</tbody></table>`;
+                container.innerHTML = tableHtml;
+            } catch (e) {
+                console.error("Error loading occupancy view:", e);
+                container.innerHTML = '<div style="color: #e74c3c; font-size: 0.85rem;">⚠️ Failed to load database view data. Check XAMPP server.</div>';
+            }
+        }
+
+        function showMessage(el, msg, type) {
+            const container = document.getElementById(el);
+            container.innerHTML = `<div class="message" style="background:${type === 'success' ? 'rgba(46, 204, 113, 0.15)' : 'rgba(231, 76, 60, 0.15)'}; border-left:3px solid ${type === 'success' ? '#2ecc71' : '#e74c3c'};">${msg}</div>`;
+            setTimeout(() => { if (container.innerHTML.includes(msg)) container.innerHTML = ''; }, 3500);
+        }
+
+        // ========== AUTHENTICATION ==========
+        async function login() {
+            const name = document.getElementById('loginName').value.trim();
+            const pass = document.getElementById('loginPass').value;
+            if (!name || !pass) { showMessage('authMsg', 'Please enter name and password', 'error'); return; }
+            try {
+                const res = await fetch(API_BASE + '/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, password: pass })
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error);
+                localStorage.setItem('user_id', data.user_id);
+                localStorage.setItem('user_role', data.role);
+                currentUserRole = data.role;
+                showMessage('authMsg', `Welcome, ${name}. ${data.role === 'Administrator' ? 'Executive access granted.' : 'Luxury access activated.'}`, 'success');
+                document.getElementById('logoutBtn').style.display = 'inline-block';
+                document.getElementById('vehicleSection').style.display = 'block';
+                document.getElementById('parkSection').style.display = 'block';
+                if (currentUserRole === 'Administrator') document.getElementById('adminPanel').style.display = 'block';
+                loadVehicles();
+                loadLots();
+                loadHistory();
+                loadOccupancyView(); // Load dynamic database view data
+                if (currentUserRole === 'Administrator') loadAdminHistory();
+            } catch(e) { showMessage('authMsg', e.message, 'error'); }
+        }
+
+        async function register() {
+            const name = document.getElementById('loginName').value.trim();
+            const pass = document.getElementById('loginPass').value;
+            if (!name || !pass) { showMessage('authMsg', 'Name and password required', 'error'); return; }
+            try {
+                const res = await fetch(API_BASE + '/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, password: pass, contact: '' })
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error);
+                showMessage('authMsg', 'Registered successfully! Please login.', 'success');
+            } catch(e) { showMessage('authMsg', e.message, 'error'); }
+        }
+
+        function logout() {
+            localStorage.clear();
+            currentUserRole = null;
+            location.reload();
+        }
+
+        // ========== VEHICLE MANAGEMENT ==========
+        async function loadVehicles() {
+            try {
+                const data = await fetchJson(API_BASE + '/vehicles');
+                const select = document.getElementById('vehicleSelect');
+                select.innerHTML = '<option value="">Select vehicle</option>';
+                data.forEach(v => select.innerHTML += `<option value="${v.VehicleID}">${v.LicensePlate} (${v.Make} ${v.Model})</option>`);
+                const listDiv = document.getElementById('vehicleList');
+                if (!data.length) {
+                    listDiv.innerHTML = '<div style="margin-top:1.5rem; opacity:0.6;">No vehicles registered. Add your first luxury automobile.</div>';
+                } else {
+                    listDiv.innerHTML = '<div><div class="collection-header"><i class="fas fa-car"></i> YOUR COLLECTION</div>' + 
+                        data.map(v => `<div class="vehicle-item"><i class="fas fa-car-side"></i> ${v.LicensePlate} – ${v.Make} ${v.Model} <span style="color:#c9b896;">(${v.Color})</span></div>`).join('') + 
+                        '</div>';
+                }
+            } catch(e) { console.error(e); }
+        }
+
+        async function addVehicle() {
+            const plate = document.getElementById('plate').value.trim();
+            if (!plate) { alert('License plate required'); return; }
+            const make = document.getElementById('make').value;
+            const model = document.getElementById('model').value;
+            const color = document.getElementById('color').value;
+            try {
+                await fetchJson(API_BASE + '/vehicles', {
+                    method: 'POST',
+                    body: JSON.stringify({ license_plate: plate, make, model, color })
+                });
+                alert('✓ Vehicle added to your fleet');
+                document.getElementById('plate').value = '';
+                document.getElementById('make').value = '';
+                document.getElementById('model').value = '';
+                document.getElementById('color').value = '';
+                loadVehicles();
+            } catch(e) { alert('Error: ' + e.message); }
+        }
+
+        // ========== PARKING LOTS & SPACES ==========
+        async function loadLots() {
+            const lots = await fetchJson(API_BASE + '/lots');
+            const select = document.getElementById('lotSelect');
+            select.innerHTML = '<option value="">Select a pavilion</option>';
+            lots.forEach(lot => select.innerHTML += `<option value="${lot.LotID}">🏛️ ${lot.Name} – ${lot.Location}</option>`);
+            if (lots.length) loadSpaceGrid();
+        }
+
+        async function loadSpaceGrid() {
+            const lotId = document.getElementById('lotSelect').value;
+            if (!lotId) return;
+            try {
+                const spaces = await fetchJson(API_BASE + `/lots/${lotId}/allspaces`);
+                const container = document.getElementById('spaceGridContainer');
+                if (!spaces.length) { container.innerHTML = '<div>No parking bays in this pavilion</div>'; return; }
+                container.innerHTML = spaces.map(sp => {
+                    let cls = '';
+                    if (sp.Status === 'Available') cls = 'available';
+                    else if (sp.Status === 'Occupied') cls = 'occupied';
+                    else cls = 'maintenance';
+                    return `<div class="space-card ${cls}" data-spaceid="${sp.SpaceID}" onclick="selectSpace(${sp.SpaceID})">
+                                ${sp.SpaceNumber}<br><small>${sp.Status}</small>
+                            </div>`;
+                }).join('');
+            } catch(e) {
+                console.error(e);
+                document.getElementById('spaceGridContainer').innerHTML = '<div style="color:#e8d5a3;">⚠️ Please ensure backend /allspaces endpoint is active</div>';
+            }
+        }
+
+        function selectSpace(spaceId) {
+            selectedSpaceId = spaceId;
+            alert(`✨ Space ${spaceId} selected. Now choose your vehicle and start parking.`);
+        }
+
+        async function startParking() {
+            let spaceId = selectedSpaceId;
+            if (!spaceId) spaceId = document.getElementById('spaceSelect')?.value;
+            const vehicleId = document.getElementById('vehicleSelect').value;
+            if (!vehicleId || !spaceId) { alert('Please select a vehicle and a space (click on a space box)'); return; }
+            try {
+                const res = await fetchJson(API_BASE + '/sessions/start', {
+                    method: 'POST',
+                    body: JSON.stringify({ vehicle_id: vehicleId, space_id: spaceId })
+                });
+                document.getElementById('activeSessionInfo').innerHTML = `<div class="active-session-badge">🏁 Session started at ${new Date(res.entry_time).toLocaleString()}</div>`;
+                loadHistory();
+                loadSpaceGrid();
+                loadOccupancyView(); // Refresh DBMS occupancy view metrics
+                selectedSpaceId = null;
+            } catch(e) { alert('Error: ' + e.message); }
+        }
+
+        async function endParking() {
+            const sessionId = document.getElementById('endSessionId').value;
+            if (!sessionId) { alert('Enter session ID'); return; }
+            try {
+                const res = await fetchJson(API_BASE + '/sessions/end', {
+                    method: 'POST',
+                    body: JSON.stringify({ session_id: sessionId })
+                });
+                alert(`✅ Session concluded.\nDuration: ${res.duration_min} minutes\nTotal: $${res.cost_usd}`);
+                document.getElementById('endSessionId').value = '';
+                loadHistory();
+                loadSpaceGrid();
+                loadOccupancyView(); // Refresh DBMS occupancy view metrics
+            } catch(e) { alert(e.message); }
+        }
+
+        async function loadHistory() {
+            try {
+                const sessions = await fetchJson(API_BASE + '/sessions/history');
+                const container = document.getElementById('historyDisplay');
+                if (!sessions.length) {
+                    container.innerHTML = '<div style="opacity:0.6;">No prior sessions. Indulge in a parking experience.</div>';
+                    document.getElementById('totalCostDisplay').innerHTML = '💰 Total Expenditure: $0.00';
+                    return;
+                }
+                let total = 0;
+                container.innerHTML = sessions.map(s => {
+                    if (s.Duration) total += (s.Duration / 60) * 2;
+                    const cost = s.Duration ? ((s.Duration / 60) * 2).toFixed(2) : 0;
+                    return `<div class="history-item">
+                                <strong>Session #${s.SessionID}</strong><br>
+                                🚗 ${s.LicensePlate} | 📍 ${s.LotName} – Space ${s.SpaceNumber}<br>
+                                🕐 Entry: ${new Date(s.EntryTime).toLocaleString()}<br>
+                                ${s.ExitTime ? `⏹️ Exit: ${new Date(s.ExitTime).toLocaleString()} | ⏱️ ${s.Duration} min | 💰 $${cost}` : '🟢 ACTIVE SESSION'}
+                            </div>`;
+                }).join('');
+                document.getElementById('totalCostDisplay').innerHTML = `💰 Total Expenditure: $${total.toFixed(2)}`;
+            } catch(e) { console.error(e); }
+        }
+
+        // ========== ADMIN FUNCTIONALITY ==========
+        async function loadAdminHistory() {
+            if (currentUserRole !== 'Administrator') { alert('Executive access only'); return; }
+            try {
+                const res = await fetch(API_BASE + '/admin/sessions?user_id=' + localStorage.getItem('user_id'));
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error);
+                const container = document.getElementById('adminHistoryDisplay');
+                if (!data.length) { container.innerHTML = '<div>No records found.</div>'; return; }
+                container.innerHTML = data.map(s => `
+                    <div class="admin-history-item">
+                        <strong>Session #${s.SessionID}</strong> | 👤 ${s.UserName}<br>
+                        🚗 ${s.LicensePlate} | 📍 ${s.LotName} - Space ${s.SpaceNumber}<br>
+                        🕐 ${new Date(s.EntryTime).toLocaleString()}<br>
+                        ${s.ExitTime ? `⏹️ ${new Date(s.ExitTime).toLocaleString()} | ${s.Duration} min` : '🟢 ACTIVE'}
+                    </div>
+                `).join('');
+            } catch(e) { alert(e.message); }
+        }
+
+        // ========== LIVE CLOCK ==========
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('liveClock').innerHTML = now.toLocaleString('en-US', { 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit',
+                hour12: true 
+            });
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // ========== RESTORE SESSION ON PAGE LOAD ==========
+        (function restoreSession() {
+            const uid = localStorage.getItem('user_id');
+            const role = localStorage.getItem('user_role');
+            if (uid && role) {
+                currentUserRole = role;
+                document.getElementById('logoutBtn').style.display = 'inline-block';
+                document.getElementById('vehicleSection').style.display = 'block';
+                document.getElementById('parkSection').style.display = 'block';
+                if (role === 'Administrator') document.getElementById('adminPanel').style.display = 'block';
+                loadVehicles();
+                loadLots();
+                loadHistory();
+                loadOccupancyView(); // Load dynamic database view data
+                if (role === 'Administrator') loadAdminHistory();
+            }
+        })();
+    </script>
+</body>
+</html>
